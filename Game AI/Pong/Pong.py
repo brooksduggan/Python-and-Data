@@ -11,6 +11,7 @@ Added AI: Brooks Duggan
 
 # Import required library
 import turtle
+import Pong_Competitor as pc
  
  
 # Create screen
@@ -25,7 +26,7 @@ left_pad = turtle.Turtle()
 left_pad.speed(0)
 left_pad.shape("square")
 left_pad.color("black")
-left_pad.shapesize(stretch_wid=6, stretch_len=2)
+left_pad.shapesize(stretch_wid=6, stretch_len=1)
 left_pad.penup()
 left_pad.goto(-400, 0)
  
@@ -35,7 +36,7 @@ right_pad = turtle.Turtle()
 right_pad.speed(0)
 right_pad.shape("square")
 right_pad.color("black")
-right_pad.shapesize(stretch_wid=6, stretch_len=2)
+right_pad.shapesize(stretch_wid=6, stretch_len=1)
 right_pad.penup()
 right_pad.goto(400, 0)
  
@@ -94,8 +95,6 @@ def paddlebdown():
  
 # Keyboard bindings
 sc.listen()
-sc.onkeypress(paddleaup, "e")
-sc.onkeypress(paddleadown, "x")
 sc.onkeypress(paddlebup, "Up")
 sc.onkeypress(paddlebdown, "Down")
  
@@ -105,6 +104,15 @@ while True:
  
     hit_ball.setx(hit_ball.xcor()+hit_ball.dx)
     hit_ball.sety(hit_ball.ycor()+hit_ball.dy)
+    
+    if pc.pong_ai(left_pad, hit_ball) == "up":
+        paddleaup()
+    elif pc.pong_ai(left_pad, hit_ball) == "down":
+        paddleadown()
+    else:
+        print("holding")
+    
+    print("xcor:", hit_ball.xcor(), "ycor:", hit_ball.ycor())
  
     # Checking borders
     if hit_ball.ycor() > 280:
